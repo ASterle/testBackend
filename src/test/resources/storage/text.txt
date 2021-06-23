@@ -1,0 +1,3 @@
+example text file
+
+To see if everything gets stored right :D!
