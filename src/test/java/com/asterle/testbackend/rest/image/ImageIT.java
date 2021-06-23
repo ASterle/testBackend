@@ -14,12 +14,27 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.Before;
-import org.junit.Test;
+import javax.annotation.PostConstruct;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.TestPropertySource;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "classpath:applicationIT.properties")
 public class ImageIT {
+
+    @LocalServerPort
+    private int port;
+
+    @PostConstruct
+    public void init() {
+        // here we setup the default URL and API base path to use throughout the tests
+
+        RestAssured.baseURI = "http://localhost:" + port;
+        RestAssured.basePath = "/image";
+    }
 
     private File getFile(final String fileName) throws URISyntaxException {
         final ClassLoader classLoader = getClass().getClassLoader();
@@ -32,13 +47,6 @@ public class ImageIT {
         final File file = new File(resource.toURI());
 
         return file;
-    }
-
-    @Before
-    public void setupURL() {
-        // here we setup the default URL and API base path to use throughout the tests
-        RestAssured.baseURI = "http://localhost:8080";
-        RestAssured.basePath = "/image";
     }
 
     @Test
