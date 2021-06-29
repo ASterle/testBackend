@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -22,9 +23,10 @@ public class DatabaseFile extends Auditable<String> {
     private String fileName;
 
     @Lob
-    private byte[] fileContent;
+    @NotNull
+    private String fileContent;
 
-    public DatabaseFile(final String fileName, final byte[] fileContent) {
+    public DatabaseFile(final String fileName, final String fileContent) {
         this.fileName = fileName;
         this.fileContent = fileContent;
     }

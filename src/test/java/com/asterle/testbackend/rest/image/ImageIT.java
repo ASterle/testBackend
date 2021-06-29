@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Base64;
 import javax.annotation.PostConstruct;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -52,12 +53,13 @@ public class ImageIT {
     @Test
     public void color_grayscale() throws IOException, URISyntaxException {
         final File file = getFile("image/image.png");
-        final byte[] image = Files.readAllBytes(file.toPath());
-        final Image colorImage = new Image(image);
+        final byte[] imageBytes = Files.readAllBytes(file.toPath());
+        final String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+        final Image colorImage = new Image(imageBytes);
 
         final ValidatableResponse response = given().contentType(ContentType.BINARY)
                 .when()
-                .body(image)
+                .body(imageBase64)
                 .post("/grayscale")
                 .then();
 
@@ -94,12 +96,13 @@ public class ImageIT {
     @Test
     public void color_red() throws IOException, URISyntaxException {
         final File file = getFile("image/image.png");
-        final byte[] image = Files.readAllBytes(file.toPath());
-        final Image originalImage = new Image(image);
+        final byte[] imageBytes = Files.readAllBytes(file.toPath());
+        final String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+        final Image originalImage = new Image(imageBytes);
 
         final ValidatableResponse response = given().contentType(ContentType.BINARY)
                 .when()
-                .body(image)
+                .body(imageBase64)
                 .post("/color/1,0,0")
                 .then();
 
@@ -132,12 +135,13 @@ public class ImageIT {
     @Test
     public void color_custom() throws IOException, URISyntaxException {
         final File file = getFile("image/image.png");
-        final byte[] image = Files.readAllBytes(file.toPath());
-        final Image originalImage = new Image(image);
+        final byte[] imageBytes = Files.readAllBytes(file.toPath());
+        final String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+        final Image originalImage = new Image(imageBytes);
 
         final ValidatableResponse response = given().contentType(ContentType.BINARY)
                 .when()
-                .body(image)
+                .body(imageBase64)
                 .post("/color/0.5,0.7,1")
                 .then();
 
@@ -170,11 +174,12 @@ public class ImageIT {
     @Test
     public void format_jpg() throws IOException, URISyntaxException {
         final File file = getFile("image/image.png");
-        final byte[] image = Files.readAllBytes(file.toPath());
+        final byte[] imageBytes = Files.readAllBytes(file.toPath());
+        final String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
 
         final ValidatableResponse response = given().contentType(ContentType.BINARY)
                 .when()
-                .body(image)
+                .body(imageBase64)
                 .post("/format/jpg")
                 .then();
 

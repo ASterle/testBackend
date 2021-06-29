@@ -9,9 +9,9 @@ public class File {
     private String fileName;
 
     @Lob
-    private byte[] fileContent;
+    private String fileContent;
 
-    public File(final String fileName, final byte[] fileContent) {
+    public File(final String fileName, final String fileContent) {
         this.fileName = fileName;
         this.fileContent = fileContent;
     }
