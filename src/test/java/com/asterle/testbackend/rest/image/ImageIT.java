@@ -57,7 +57,7 @@ public class ImageIT {
         final String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
         final Image colorImage = new Image(imageBytes);
 
-        final ValidatableResponse response = given().contentType(ContentType.BINARY)
+        final ValidatableResponse response = given().contentType(ContentType.TEXT)
                 .when()
                 .body(imageBase64)
                 .post("/grayscale")
@@ -100,7 +100,7 @@ public class ImageIT {
         final String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
         final Image originalImage = new Image(imageBytes);
 
-        final ValidatableResponse response = given().contentType(ContentType.BINARY)
+        final ValidatableResponse response = given().contentType(ContentType.TEXT)
                 .when()
                 .body(imageBase64)
                 .post("/color/1,0,0")
@@ -139,7 +139,7 @@ public class ImageIT {
         final String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
         final Image originalImage = new Image(imageBytes);
 
-        final ValidatableResponse response = given().contentType(ContentType.BINARY)
+        final ValidatableResponse response = given().contentType(ContentType.TEXT)
                 .when()
                 .body(imageBase64)
                 .post("/color/0.5,0.7,1")
@@ -177,7 +177,7 @@ public class ImageIT {
         final byte[] imageBytes = Files.readAllBytes(file.toPath());
         final String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
 
-        final ValidatableResponse response = given().contentType(ContentType.BINARY)
+        final ValidatableResponse response = given().contentType(ContentType.TEXT)
                 .when()
                 .body(imageBase64)
                 .post("/format/jpg")
