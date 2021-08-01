@@ -8,12 +8,12 @@
         <version>2.5.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
+    <groupId>com.asterle</groupId>
     <artifactId>testBackend</artifactId>
     <version>0.0.2-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>testBackend</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Backend for testing</description>
     <properties>
         <java.version>11</java.version>
     </properties>
