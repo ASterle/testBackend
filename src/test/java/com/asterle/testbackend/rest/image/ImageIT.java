@@ -189,7 +189,7 @@ public class ImageIT {
                 .contentType(ContentType.BINARY)
                 .extract().asByteArray();
 
-        final Path resultPath = Path.of("/tmp/convertedImage.jpg");
+        final Path resultPath = Path.of(System.getProperty("java.io.tmpdir") + "/convertedImage.jpg");
         Files.write(resultPath, convertedImage);
         final String resultMimeType = Files.probeContentType(resultPath);
 

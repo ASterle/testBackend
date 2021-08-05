@@ -11,7 +11,7 @@
     <groupId>com.asterle</groupId>
     <artifactId>testBackend</artifactId>
     <version>0.0.2-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>testBackend</name>
     <description>Backend for testing</description>
     <properties>
